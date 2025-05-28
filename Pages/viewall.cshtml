@@ -1,0 +1,39 @@
+﻿@page
+@model WebApplicationGr3.Pages.ViewallModel
+@{
+    ViewData["Title"] = "Książka kucharska";
+}
+
+<div style="max-width: 900px; margin: auto; padding: 20px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2 style="font-size: 28px; font-weight: bold;">📖 Moja Książka Kucharska</h2>
+        <a asp-page="/View" class="btn btn-primary">📖 Przeglądaj</a>
+        <a asp-page="/Create" class="btn btn-primary">➕ Dodaj przepis</a>
+    </div>
+
+    <hr style="margin: 20px 0;" />
+
+    <form method="post">
+        @if (Model.RecipeList != null && Model.RecipeList.Any())
+        {
+            <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                @foreach (var recipe in Model.RecipeList)
+                {
+                    <div style="flex: 1 0 21%; background-color: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 15px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);">
+                        <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">@recipe.Name</h3>
+                        <p style="color: #6b7280;">Kategoria: @recipe.Category</p>
+                        <div style="margin-top: 15px; display: flex; justify-content: space-between;">
+                            <a asp-page="/Read" asp-route-id="@recipe.Id" class="btn btn-success">Otwórz</a>
+                            <a asp-page="/Update" asp-route-id="@recipe.Id" class="btn btn-warning">Edytuj</a>
+                            <button type="submit" asp-route-id="@recipe.Id" class="btn btn-danger">Usuń</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p style="color: gray;">Brak przepisów do wyświetlenia.</p>
+        }
+    </form>
+</div>

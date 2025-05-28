@@ -1,0 +1,52 @@
+﻿@page
+@model WebApplicationGr3.Pages.UpdateModel
+@{
+    ViewData["Title"] = "Edytuj przepis";
+}
+
+<div style="max-width: 900px; margin: auto; padding: 20px; background-color: #f9fafb; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+    <h2 style="font-size: 28px; font-weight: bold; margin-bottom: 20px;">✏️ Edytuj przepis</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        <div style="margin-bottom: 15px;">
+            <label style="font-weight: bold;">Nazwa przepisu:</label><br />
+            <input asp-for="Recipe.Name" class="form-input" />
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label style="font-weight: bold;">Kategoria:</label><br />
+            <input asp-for="Recipe.Category" class="form-input" />
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label style="font-weight: bold;">Składniki:</label><br />
+            <textarea asp-for="Recipe.Ingridient" rows="5" class="form-textarea"></textarea>
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="font-weight: bold;">Opis:</label><br />
+            <textarea asp-for="Recipe.ShortDescription" rows="5" class="form-textarea"></textarea>
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="font-weight: bold;">Instrukcje:</label><br />
+            <textarea asp-for="Recipe.Description" rows="5" class="form-textarea"></textarea>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label style="font-weight: bold;">Nowe zdjęcie:</label><br />
+            <input type="file" asp-for="PhotoFile" class="form-input" />
+        </div>
+
+        @if (Model.Recipe.Image != null)
+        {
+            <div style="margin-bottom: 20px;">
+                <label style="font-weight: bold;">Aktualne zdjęcie:</label><br />
+                <img src="data:image/jpg;base64,@(Convert.ToBase64String(Model.Recipe.Image))" alt="Zdjęcie" style="max-width: 100%; border-radius: 8px; margin-top: 10px;" />
+            </div>
+        }
+
+        <div style="text-align: right;">
+            <button type="submit" class="btn btn-primary">💾 Zapisz</button>
+            <a asp-page="/View" class="btn btn-secondary">↩️ Powrót</a>
+        </div>
+    </form>
+</div>
